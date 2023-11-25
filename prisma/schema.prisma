@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// schema.prisma
+
+// schema.prisma
+
+// Define the schema in schema.prisma
+
+model Student {
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  firstName      String
+  lastName       String
+  email          String           @unique
+  student_course Student_Course[]
+}
+
+model Professor {
+  id              String             @id @default(auto()) @map("_id") @db.ObjectId
+  firstName       String
+  lastName        String
+  email           String             @unique
+  professor_couse Professor_Course[]
+}
+
+model Course {
+  id              String             @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  description     String
+  student_course  Student_Course[]
+  professor_couse Professor_Course[]
+}
+
+model Student_Course {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  Student   Student? @relation(fields: [studentId], references: [id])
+  studentId String?  @db.ObjectId
+  Course    Course?  @relation(fields: [courseId], references: [id])
+  courseId  String?  @db.ObjectId
+}
+
+model Professor_Course {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  Course      Course?    @relation(fields: [courseId], references: [id])
+  courseId    String?    @db.ObjectId
+  Professor   Professor? @relation(fields: [professorId], references: [id])
+  professorId String?    @db.ObjectId
+}
+
+model interation {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  model   notes? @relation(fields: [notesId], references: [id])
+  notesId String @unique @db.ObjectId
+}
+
+model notes {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  note         String
+  interation   interation?
+  interationId String      @unique @db.ObjectId
+}
