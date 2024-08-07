@@ -6,7 +6,9 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.462.0",
     "@prisma/client": "^5.3.1",
+    "bunyan": "^1.8.15",
     "casual": "^1.6.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -15,7 +17,9 @@
     "ioredis": "^5.3.2",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "prisma": "^5.3.1"
